@@ -1,1 +1,17 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        ans = []
+        n = len(candidates)
+        def backtrack(curComb = [], idx = 0):
+            curSum = sum(curComb)
+            if curSum > target:
+                return
+            if curSum == target:
+                ans.append(curComb)
+                return
+            for i in range(idx, n):
+                num = candidates[i]
+                backtrack(curComb + [num], i)
+        backtrack()
+        return ans
 
