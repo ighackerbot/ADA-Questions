@@ -1,0 +1,20 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+        curr = []
+        
+        def helper(s):
+            if not s:
+                res.append(curr[:])   
+                return 
+            for i in range(len(s)):
+                temp = s[:i+1]
+                if temp == temp[::-1]:   
+                    curr.append(temp)
+                    helper(s[i+1:])      
+                    curr.pop()          
+        
+        helper(s)
+        return res
+
+        
