@@ -1,0 +1,18 @@
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        dic = {}
+        def helper(i, j):
+            if i >= m or j >= n:
+                return float('inf')  
+            if i == m - 1 and j == n - 1:
+                return grid[i][j]
+            if (i, j) in dic:
+                return dic[(i, j)]
+            
+            down = helper(i + 1, j)
+            right = helper(i, j + 1)
+            dic[(i, j)] = grid[i][j] + min(down, right)
+            return dic[(i, j)]
+        return helper(0, 0)
+            
