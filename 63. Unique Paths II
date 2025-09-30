@@ -1,0 +1,20 @@
+class Solution:
+    def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+        m = len(obstacleGrid)
+        n = len(obstacleGrid[0])
+
+        dic = {}  
+
+        def helper(i, j):
+            if (i, j) in dic:
+                return dic[(i, j)]
+
+            if i == m or j == n or obstacleGrid[i][j] == 1:
+                return 0 
+
+            if i == m - 1 and j == n - 1:
+                return 1  
+            dic[(i, j)] = helper(i + 1, j) + helper(i, j + 1)
+            return dic[(i, j)]
+
+        return helper(0, 0)
